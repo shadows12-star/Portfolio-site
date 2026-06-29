@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | Portfolio</title>
+    <meta name="description" content="{{ profile.title }}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav container">
+            <a href="#home" class="brand">{{ profile.name }}</a>
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#stats">GitHub</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <p>© {{ profile.name }}. Built with Django.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'portfolio/js/main.js' %}"></script>
+</body>
+</html>
