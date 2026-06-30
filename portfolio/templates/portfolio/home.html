@@ -773,9 +773,37 @@
             <!-- Project Image -->
             {% if project.image %}
             <div class="relative h-52 overflow-hidden bg-[#07111f]">
+                {% if project.name == "Spotify Clone" %}
+                <img src="{% static 'portfolio/images/projects/spotify-clone.png' %}"
+                     alt="{{ project.name }}"
+                     loading="lazy"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% elif project.name == "Premium E-Commerce Site" %}
+                <img src="{% static 'portfolio/images/projects/ecommerce-site.png' %}"
+                     alt="{{ project.name }}"
+                     loading="lazy"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% elif project.name == "Django Blog" %}
+                <img src="{% static 'portfolio/images/projects/django-blog.png' %}"
+                     alt="{{ project.name }}"
+                     loading="lazy"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% elif project.name == "Stock Market Prediction" %}
+                <img src="{% static 'portfolio/images/projects/stock-market.png' %}"
+                     alt="{{ project.name }}"
+                     loading="lazy"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% elif project.name == "Ostad" or project.name == "Ostad Clone" or project.name == "Ostad Platform" %}
+                <img src="{% static 'portfolio/images/projects/ostad.png' %}"
+                     alt="{{ project.name }}"
+                     loading="lazy"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% else %}
                 <img src="{% static project.image %}"
                      alt="{{ project.name }}"
+                     loading="lazy"
                      class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+                {% endif %}
 
                 <div class="absolute inset-0 bg-gradient-to-t from-[#101b2c] via-transparent to-transparent"></div>
             </div>
