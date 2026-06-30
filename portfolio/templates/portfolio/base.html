@@ -1,37 +1,204 @@
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ profile.name }} | Portfolio</title>
-    <meta name="description" content="{{ profile.title }}">
-    <link rel="stylesheet" href="{% static 'portfolio/css/styles.css' %}">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ profile.name }} | Portfolio</title>
+
+<meta name="description" content="{{ profile.title }}">
+<meta name="theme-color" content="#08111f">
+
+<meta property="og:title" content="{{ profile.name }} | Portfolio">
+<meta property="og:description" content="{{ profile.title }}">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="{% static 'portfolio/images/profile.jpeg' %}">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    darkBg: "#08111f",
+                    darkSection: "#0b1526",
+                    darkCard: "#111c2d",
+                    darkCard2: "#162235",
+                    accent: "#5eead4",
+                    softText: "#cbd8ea",
+                    mutedText: "#9fb0c9"
+                }
+            }
+        }
+    }
+</script>
+
 </head>
-<body>
-    <header class="site-header">
-        <nav class="nav container">
-            <a href="#home" class="brand">{{ profile.name }}</a>
-            <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#stats">GitHub</a>
-                <a href="#certifications">Certifications</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
 
-    {% block content %}{% endblock %}
+<body class="bg-darkBg text-white antialiased">
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-darkBg/95 backdrop-blur-xl">
+        <nav class="mx-auto flex min-h-[72px] w-[92%] max-w-6xl items-center justify-between">
+            <!-- Brand -->
+            <a href="#home" class="text-lg font-extrabold tracking-wide">
+                {{ profile.name }}
+            </a>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© {{ profile.name }}. Built with Django.</p>
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn"
+                class="text-2xl text-white md:hidden"
+                aria-label="Toggle navigation">
+            ☰
+        </button>
+
+        <!-- Navbar Links -->
+        <div id="navLinks"
+             class="hidden absolute left-0 right-0 top-[72px] flex-col gap-5 border-b border-white/10 bg-darkBg px-[4%] py-5 text-sm text-softText md:static md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0">
+
+            <a href="#about"
+               data-section="about"
+               class="nav-link hover:text-accent">
+                About
+            </a>
+
+            <a href="#skills"
+               data-section="skills"
+               class="nav-link hover:text-accent">
+                Skills
+            </a>
+
+            <a href="#education"
+               data-section="education"
+               class="nav-link hover:text-accent">
+                Education
+            </a>
+
+            <a href="#certifications"
+               data-section="certifications"
+               class="nav-link hover:text-accent">
+                Certifications
+            </a>
+
+            <a href="#projects"
+               data-section="projects"
+               class="nav-link hover:text-accent">
+                Projects
+            </a>
+
+            <a href="{{ profile.github }}"
+               target="_blank"
+               rel="noopener"
+               class="hover:text-accent">
+                GitHub
+            </a>
+
+            <a href="#contact"
+               data-section="contact"
+               class="nav-link hover:text-accent">
+                Contact
+            </a>
+
+            <a href="{% static 'portfolio/files/asiful-alam-sami-cv.pdf' %}"
+               download
+               class="rounded-lg bg-accent px-5 py-2 font-bold text-darkBg transition hover:-translate-y-0.5 hover:bg-[#7fffee]">
+                Download CV
+            </a>
         </div>
-    </footer>
+    </nav>
+</header>
 
-    <script src="{% static 'portfolio/js/main.js' %}"></script>
+{% block content %}{% endblock %}
+
+<footer class="bg-[#050b14] py-7 text-center text-mutedText">
+    <div class="mx-auto w-[92%] max-w-6xl">
+        <p>© {{ profile.name }}. Built with Django & Tailwind CSS.</p>
+    </div>
+</footer>
+
+<script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const navItems = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
+
+    const activeClasses = [
+        "font-semibold",
+        "text-accent",
+        "underline",
+        "underline-offset-8"
+    ];
+
+    const inactiveClasses = [
+        "text-softText"
+    ];
+
+    function setActiveNav(sectionId) {
+        navItems.forEach((item) => {
+            const itemSection = item.getAttribute("data-section");
+
+            item.classList.remove(...activeClasses);
+            item.classList.add(...inactiveClasses);
+
+            if (itemSection === sectionId) {
+                item.classList.add(...activeClasses);
+                item.classList.remove(...inactiveClasses);
+            }
+        });
+    }
+
+    function updateActiveNavOnScroll() {
+        let currentSection = "";
+
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight
+            ) {
+                currentSection = section.getAttribute("id");
+            }
+        });
+
+        if (currentSection) {
+            setActiveNav(currentSection);
+        }
+    }
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("hidden");
+            navLinks.classList.toggle("flex");
+        });
+
+        navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                    navLinks.classList.add("hidden");
+                    navLinks.classList.remove("flex");
+                }
+            });
+        });
+    }
+
+    navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const sectionId = item.getAttribute("data-section");
+            setActiveNav(sectionId);
+        });
+    });
+
+    window.addEventListener("scroll", updateActiveNavOnScroll);
+    window.addEventListener("load", updateActiveNavOnScroll);
+</script>
+
 </body>
 </html>

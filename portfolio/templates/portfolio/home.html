@@ -1,184 +1,1070 @@
 {% extends "portfolio/base.html" %}
+{% load static %}
 
 {% block content %}
+
 <main>
-    <section class="hero" id="home">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <p class="eyebrow">Backend Web Developer</p>
-                <h1>Hi, I'm <span>{{ profile.name }}</span></h1>
-                <h2>{{ profile.title }}</h2>
-                <p class="hero-text">{{ profile.summary }}</p>
+    <!-- Hero Section -->
+    <section id="home" class="bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.25),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.20),transparent_35%)] py-20 md:py-28">
+        <div class="mx-auto grid w-[92%] max-w-6xl items-center gap-12 md:grid-cols-[1.25fr_0.75fr]">
+            <div>
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-accent">
+                    Backend Web Developer
+                </p>
 
-                <div class="hero-actions">
-                    <a href="#projects" class="btn primary">View Projects</a>
-                    <a href="mailto:{{ profile.email }}" class="btn secondary">Contact Me</a>
+                   <h1 class="mb-5 text-5xl font-extrabold leading-none md:text-7xl">
+            Hi, I'm <span class="text-accent">{{ profile.name }}</span>
+        </h1>
+
+        <h2 class="mb-5 text-xl font-semibold text-softText md:text-2xl">
+            {{ profile.title }}
+        </h2>
+
+        <p class="max-w-2xl text-base leading-7 text-softText md:text-lg">
+            {{ profile.summary }}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#projects"
+               class="rounded-full bg-accent px-6 py-3 font-bold text-darkBg shadow-lg shadow-accent/20 transition hover:-translate-y-1">
+                View Projects
+            </a>
+
+            <a href="#contact"
+               class="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:border-accent/50">
+                Contact Me
+            </a>
+
+            <a href="{% static 'portfolio/files/asiful-alam-sami-cv.pdf' %}"
+               download
+               class="rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-bold text-accent transition hover:-translate-y-1 hover:bg-accent hover:text-darkBg">
+                Download CV
+            </a>
+        </div>
+
+        <div class="mt-7 flex flex-wrap items-center gap-5 text-sm text-softText">
+            <a href="{{ profile.github }}"
+               target="_blank"
+               rel="noopener"
+               class="inline-flex items-center gap-2 border-b border-accent/50 pb-1 transition hover:-translate-y-0.5 hover:text-accent">
+                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2.16c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.76 2.72 1.25 3.38.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11.04 11.04 0 0 1 12 6.02c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+                </svg>
+                GitHub
+            </a>
+
+            <a href="{{ profile.linkedin }}"
+               target="_blank"
+               rel="noopener"
+               class="inline-flex items-center gap-2 border-b border-accent/50 pb-1 transition hover:-translate-y-0.5 hover:text-accent">
+                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.54V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z"/>
+                </svg>
+                LinkedIn
+            </a>
+
+            <a href="{{ profile.facebook }}"
+               target="_blank"
+               rel="noopener"
+               class="inline-flex items-center gap-2 border-b border-accent/50 pb-1 transition hover:-translate-y-0.5 hover:text-accent">
+                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/>
+                </svg>
+                Facebook
+            </a>
+        </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-[380px] rounded-[28px] border border-white/10 bg-white/5 p-8 text-center shadow-2xl">
+        <img src="{% static 'portfolio/images/profile.jpeg' %}"
+             alt="{{ profile.name }}"
+             class="mx-auto mb-5 h-40 w-40 rounded-full border-4 border-accent/60 object-cover object-top shadow-xl">
+
+        <h3 class="text-2xl font-extrabold">
+            {{ profile.name }}
+        </h3>
+
+        <p class="mt-2 text-base font-semibold text-accent">
+            Backend Web Developer | Django & React
+        </p>
+
+        <p class="mt-1 text-sm text-softText">
+            {{ profile.location }}
+        </p>
+
+        <div class="mt-5 rounded-2xl bg-accent/10 px-5 py-3 text-sm font-bold text-[#d7fffa]">
+            AI/ML Enthusiast | Currently Learning DevOps
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- About Section -->
+<!-- About Section -->
+
+<section id="about" class="bg-[#08111f] py-24">
+    <div class="mx-auto grid w-[92%] max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <!-- Left Side -->
+        <div>
+            <div class="mb-6 flex items-center gap-4">
+                <span class="h-[2px] w-8 bg-accent"></span>
+                <p class="text-xs font-bold uppercase tracking-[0.35em] text-accent">
+                    About Me
+                </p>
+            </div>
+
+
+        <h2 class="max-w-xl text-4xl font-extrabold leading-tight text-white md:text-6xl">
+            Building full-stack web applications and
+            <span class="text-accent">learning production-ready engineering.</span>
+        </h2>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-2">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-6">
+                <div class="mb-4 text-accent">
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 5h16v14H4z"/>
+                        <path d="M8 9h8"/>
+                        <path d="M8 13h5"/>
+                    </svg>
                 </div>
 
-                <div class="socials">
-                    <a href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a>
-                    <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="{{ profile.facebook }}" target="_blank" rel="noopener">Facebook</a>
+                <p class="text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                    Architecture
+                </p>
+
+                <h3 class="mt-2 font-extrabold text-white">
+                    Django + React
+                </h3>
+            </div>
+
+            <div class="rounded-xl border border-white/10 bg-white/5 p-6">
+                <div class="mb-4 text-accent">
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3 3 8l9 5 9-5-9-5Z"/>
+                        <path d="M3 14l9 5 9-5"/>
+                        <path d="M3 11l9 5 9-5"/>
+                    </svg>
+                </div>
+
+                <p class="text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                    Education
+                </p>
+
+                <h3 class="mt-2 font-extrabold text-white">
+                    EWU CSE Graduate
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side -->
+    <div>
+        <div class="space-y-6 text-softText">
+            <p class="font-semibold text-white">
+                Hi, I'm <span class="text-accent">Asiful Alam Sami.</span>
+            </p>
+
+            <p>
+                I am a Computer Science graduate from
+                <span class="font-bold text-white">East West University</span>
+                with a passion for building robust, full-stack web applications and exploring the
+                frontiers of AI/ML.
+            </p>
+
+            <p>
+                Spanning the bridge between traditional software engineering and intelligent systems,
+                I specialize in the
+                <span class="font-bold text-white">Django + React ecosystem</span>.
+                My approach focuses on creating scalable architectures that handle real-world
+                complexities with ease.
+            </p>
+
+            <p>
+                Driven by curiosity, I actively look for ways to optimize backend performance,
+                design intuitive user experiences, and integrate data-driven insights into production.
+                I am currently expanding my skill set into
+                <span class="font-bold text-accent">DevOps</span>
+                to build more seamless, automated deployment pipelines.
+            </p>
+        </div>
+
+         <div class="mt-10 grid gap-5 md:grid-cols-3">
+    <div class="rounded-xl border border-white/10 bg-white/5 p-6">
+        <div class="mb-5 text-accent">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 5h16v14H4z"/>
+                <path d="M8 9h8"/>
+                <path d="M8 13h5"/>
+            </svg>
+        </div>
+
+    <h3 class="font-extrabold text-white">
+        Full-Stack Development
+    </h3>
+
+    <p class="mt-3 text-sm text-softText">
+        Building Django, DRF, FastAPI, and React-based web applications with clean backend logic and responsive interfaces.
+    </p>
+</div>
+
+<div class="rounded-xl border border-white/10 bg-white/5 p-6">
+    <div class="mb-5 text-accent">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20"/>
+            <path d="M5 7h14"/>
+            <path d="M5 17h14"/>
+            <path d="M7 7c2.5 3 2.5 7 0 10"/>
+            <path d="M17 7c-2.5 3-2.5 7 0 10"/>
+        </svg>
+    </div>
+
+    <h3 class="font-extrabold text-white">
+        AI/ML Engineering
+    </h3>
+
+    <p class="mt-3 text-sm text-softText">
+        Exploring machine learning, LSTM models, TensorFlow, Scikit-Learn, and data-driven systems for real-world prediction tasks.
+    </p>
+</div>
+
+<div class="rounded-xl border border-white/10 bg-white/5 p-6">
+    <div class="mb-5 text-accent">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 17h16"/>
+            <path d="M6 17V7h12v10"/>
+            <path d="M9 10h6"/>
+            <path d="M12 14h.01"/>
+        </svg>
+    </div>
+
+    <h3 class="font-extrabold text-white">
+        DevOps Learning
+    </h3>
+
+    <p class="mt-3 text-sm text-softText">
+        Expanding skills in deployment, automation, CI/CD, GitHub workflows, and production-ready development practices.
+    </p>
+</div>
+
+
+</div>
+
+
+        <div class="mt-10 flex flex-wrap items-center gap-6">
+            <a href="#contact"
+               class="rounded-lg bg-accent px-8 py-4 font-extrabold text-darkBg shadow-lg shadow-accent/20 transition hover:-translate-y-1">
+                Let's build something impactful!
+            </a>
+
+            <a href="#projects"
+               class="inline-flex items-center gap-3 font-extrabold text-white transition hover:text-accent">
+                View my work
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
+
+<!-- Education Section -->
+
+<section id="education" class="bg-darkBg py-24">
+    <div class="mx-auto w-[92%] max-w-6xl">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.35em] text-accent">
+            Academic Background
+        </p>
+
+
+    <h2 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">
+        Education
+    </h2>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-[1.8fr_0.9fr]">
+        <!-- Main Education Card -->
+        <article class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-8 shadow-xl">
+            <div class="absolute right-8 top-8 hidden text-white/5 md:block">
+                <svg class="h-24 w-24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3Zm0 13.2L5.35 12.57V16.5c0 1.49 2.98 3 6.65 3s6.65-1.51 6.65-3v-3.93L12 16.2Z"/>
+                </svg>
+            </div>
+
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h3 class="font-extrabold text-accent">
+                        Bachelor of Science in Computer Science and Engineering
+                    </h3>
+
+                    <p class="mt-3 font-bold text-white">
+                        East West University
+                    </p>
+                </div>
+
+                <span class="w-fit rounded-full bg-[#243149] px-5 py-2 text-xs font-bold tracking-wide text-softText">
+                    Expected Graduation: Sept 2026
+                </span>
+            </div>
+
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                        Department
+                    </p>
+
+                    <p class="mt-2 font-semibold text-white">
+                        Computer Science and Engineering
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                        Academic Standing
+                    </p>
+
+                    <p class="mt-2 font-semibold text-white">
+                        CGPA 3.99 / 4.00
+                        <span class="text-accent">◎</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                        Credits Earned
+                    </p>
+
+                    <p class="mt-2 font-semibold text-white">
+                        130 / 140 Credits
+                    </p>
                 </div>
             </div>
 
-            <div class="hero-card">
-                <div class="profile-circle">{{ profile.name|slice:":1" }}</div>
-                <h3>{{ profile.name }}</h3>
-                <p>{{ profile.location }}</p>
-                <div class="status">Software Developer | Backend Web Development | AI/ML Enthusiast</div>
+            <div class="mt-8 rounded-md border-l-4 border-accent bg-[#1b283b] p-5 text-sm leading-7 text-softText">
+                Computer Science undergraduate with strong academic performance and hands-on project experience in Python,
+                Django, Django REST Framework, React, and machine learning. Currently expanding expertise in DevOps
+                and AI/ML engineering.
+            </div>
+
+            <div class="mt-8">
+                <p class="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-mutedText">
+                    Relevant Coursework
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Data Structures</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Algorithms</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Database Systems</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Advanced Database Systems</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Artificial Intelligence</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Software Engineering</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Web Programming</span>
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">Computer Networks</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Side Cards -->
+        <div class="grid gap-6">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-8 text-center">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center text-accent">
+                    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 15l-3.5 2 1-4-3-2.6 4-.3L12 6l1.5 4.1 4 .3-3 2.6 1 4z"/>
+                        <path d="M8 21l4-2 4 2v-5H8v5z"/>
+                    </svg>
+                </div>
+
+                <h3 class="font-extrabold text-white">
+                    Academic Recognition
+                </h3>
+
+                <p class="mt-3 text-sm text-mutedText">
+                    Dean’s List & Merit Scholarship
+                </p>
+            </div>
+
+            <div class="rounded-xl border border-white/10 bg-white/5 p-8 text-center">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center text-accent">
+                    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m8 9-4 3 4 3"/>
+                        <path d="m16 9 4 3-4 3"/>
+                    </svg>
+                </div>
+
+                <h3 class="font-extrabold text-white">
+                    Technical Focus
+                </h3>
+
+                <p class="mt-3 text-sm text-mutedText">
+                    Backend Development, AI/ML & DevOps
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section class="section" id="about">
-        <div class="container two-column">
-            <div>
-                <p class="section-label">About Me</p>
-                <h2>Building backend systems and learning production-ready engineering.</h2>
+
+</section>
+
+
+<!-- Redesigned Skills Section -->
+
+<section id="skills" class="bg-[#08111f] py-24">
+    <div class="mx-auto w-[92%] max-w-6xl">
+        <div class="mb-12">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.35em] text-accent">
+                Tech Stack
+            </p>
+
+
+        <h2 class="text-4xl font-extrabold leading-tight text-white md:text-6xl">
+            Skills and tools I use
+        </h2>
+
+        <p class="mt-5 max-w-2xl text-softText">
+            Technologies I use for backend development, full-stack applications, AI/ML practice, and DevOps learning.
+        </p>
+    </div>
+
+    <div class="grid gap-7 lg:grid-cols-3">
+        <!-- Backend -->
+        <div class="group rounded-2xl border border-white/10 bg-[#101b2c] p-8 transition duration-300 hover:-translate-y-2 hover:border-accent/50 hover:bg-[#132f3b] hover:shadow-2xl hover:shadow-accent/10 lg:col-span-2">
+            <div class="mb-7 flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:bg-accent group-hover:text-darkBg">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                        <path d="M8 9h8"/>
+                        <path d="M8 13h8"/>
+                        <path d="M8 17h5"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white">
+                        Backend & Infrastructure
+                    </h3>
+                    <p class="text-sm text-mutedText">
+                        API development, authentication, and server-side logic
+                    </p>
+                </div>
             </div>
-            <div>
-                <p>
-                    I work with Django, Django REST Framework, FastAPI, and React.
-                    My current goal is to become stronger in backend engineering, DevOps,
-                    cloud deployment, and AI/ML engineering.
-                </p>
-                <p>
-                    I enjoy learning how real-world software systems are designed, deployed,
-                    automated, and scaled.
-                </p>
+
+            <div class="flex flex-wrap gap-4">
+                <div class="tech-pill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-logo">
+                    <span>Python</span>
+                </div>
+
+                <div class="tech-pill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="tech-logo brightness-0 invert">
+                    <span>Django</span>
+                </div>
+
+                <div class="tech-pill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" class="tech-logo">
+                    <span>FastAPI</span>
+                </div>
+
+                <div class="tech-pill">
+                    <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 7h16"/>
+                        <path d="M4 12h16"/>
+                        <path d="M4 17h10"/>
+                    </svg>
+                    <span>REST API</span>
+                </div>
+
+                <div class="tech-pill">
+                    <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <span>Authentication</span>
+                </div>
+
+                <div class="tech-pill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-logo">
+                    <span>PostgreSQL</span>
+                </div>
+
+                <div class="tech-pill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-logo">
+                    <span>MySQL</span>
+                </div>
             </div>
         </div>
-    </section>
 
-    <section class="section dark" id="skills">
-        <div class="container">
-            <p class="section-label">Tech Stack</p>
-            <h2>Skills and tools I use</h2>
+        <!-- Frontend -->
+        <div class="group rounded-2xl border border-white/10 bg-[#162235] p-8 transition duration-300 hover:-translate-y-2 hover:border-accent/50 hover:bg-[#173345] hover:shadow-2xl hover:shadow-accent/10">
+            <div class="mb-7 flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:bg-accent group-hover:text-darkBg">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="m4 15 4-4 3 3 7-7 2 2-9 9-3-3-2 2-2-2Z"/>
+                    </svg>
+                </div>
 
-            <div class="skill-grid">
-                {% for category, skills in tech_stack.items %}
-                <div class="skill-card">
-                    <h3>{{ category }}</h3>
-                    <div class="tags">
-                        {% for skill in skills %}
-                        <span>{{ skill }}</span>
-                        {% endfor %}
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white">
+                        Frontend
+                    </h3>
+                    <p class="text-sm text-mutedText">
+                        Responsive and modern user interfaces
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-logo">
+                    <span>React.js</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="Tailwind CSS" class="tech-logo">
+                    <span>Tailwind CSS</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" class="tech-logo">
+                    <span>Redux</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" alt="Vite" class="tech-logo">
+                    <span>Vite</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="tech-logo">
+                    <span>Bootstrap</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI / ML -->
+        <div class="group rounded-2xl border border-white/10 bg-[#111c2d] p-8 transition duration-300 hover:-translate-y-2 hover:border-accent/50 hover:bg-[#182b3a] hover:shadow-2xl hover:shadow-accent/10">
+            <div class="mb-7 flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:bg-accent group-hover:text-darkBg">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20"/>
+                        <path d="M5 7h14"/>
+                        <path d="M5 17h14"/>
+                        <path d="M7 7c2.5 3 2.5 7 0 10"/>
+                        <path d="M17 7c-2.5 3-2.5 7 0 10"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white">
+                        AI / Deep Learning
+                    </h3>
+                    <p class="text-sm text-mutedText">
+                        Data processing and prediction models
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="tech-logo">
+                    <span>TensorFlow</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="tech-logo">
+                    <span>PyTorch</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" class="tech-logo">
+                    <span>NumPy</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" class="tech-logo">
+                    <span>Pandas</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" class="tech-logo">
+                    <span>Matplotlib</span>
+                </div>
+
+                <div class="tech-pill-dark">
+                    <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19V5"/>
+                        <path d="M4 19h16"/>
+                        <path d="m7 15 4-4 3 3 5-7"/>
+                    </svg>
+                    <span>LSTM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DevOps -->
+        <div class="group rounded-2xl border border-white/10 bg-[#2a3446] p-8 transition duration-300 hover:-translate-y-2 hover:border-accent/50 hover:bg-[#20384a] hover:shadow-2xl hover:shadow-accent/10 lg:col-span-2">
+            <div class="mb-7 flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:bg-accent group-hover:text-darkBg">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12h6"/>
+                        <path d="M12 9v6"/>
+                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white">
+                        DevOps & Tooling
+                    </h3>
+                    <p class="text-sm text-mutedText">
+                        Version control, testing, deployment, and automation
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid gap-8 md:grid-cols-2">
+                <div>
+                    <p class="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-accent/80">
+                        Version & Environment
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <div class="tech-pill-dark">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="tech-logo">
+                            <span>Git</span>
+                        </div>
+
+                        <div class="tech-pill-dark">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="tech-logo">
+                            <span>Docker</span>
+                        </div>
+
+                        <div class="tech-pill-dark">
+                            <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="Postman" class="tech-logo">
+                            <span>Postman</span>
+                        </div>
                     </div>
                 </div>
-                {% endfor %}
+
+                <div>
+                    <p class="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-accent/80">
+                        Deployment
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <div class="tech-pill-dark">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" class="tech-logo">
+                            <span>Nginx</span>
+                        </div>
+
+                        <div class="tech-pill-dark">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="tech-logo brightness-0 invert">
+                            <span>GitHub Actions</span>
+                        </div>
+
+                        <div class="tech-pill-dark">
+                            <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 17h16"/>
+                                <path d="M6 17V7h12v10"/>
+                                <path d="M9 10h6"/>
+                            </svg>
+                            <span>CI/CD</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-     <section class="section dark" id="certifications">
-    <div class="container">
-        <p class="section-label">Certifications</p>
-        <h2>Training and Certificates</h2>
+    </div>
 
-        <div class="project-grid">
-            {% for certificate in certifications %}
-            <article class="project-card">
-                <h3>{{ certificate.name }}</h3>
-                <p>{{ certificate.issuer }}</p>
+    <style>
+        .tech-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(94, 234, 212, 0.25);
+            background: rgba(94, 234, 212, 0.10);
+            padding: 0.55rem 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 800;
+            color: #5eead4;
+            transition: all 0.25s ease;
+        }
 
-                {% if certificate.category %}
-                <p>{{ certificate.category }}</p>
-                {% endif %}
+        .tech-pill:hover {
+            transform: translateY(-6px) scale(1.06);
+            background: #5eead4;
+            color: #08111f;
+            box-shadow: 0 16px 35px rgba(94, 234, 212, 0.22);
+        }
 
-                {% if certificate.description %}
-                <p>{{ certificate.description }}</p>
-                {% endif %}
+        .tech-pill-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-radius: 0.65rem;
+            background: #07111f;
+            padding: 0.55rem 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 800;
+            color: white;
+            transition: all 0.25s ease;
+        }
 
+        .tech-pill-dark:hover {
+            transform: translateY(-6px) scale(1.06);
+            background: #5eead4;
+            color: #08111f;
+            box-shadow: 0 16px 35px rgba(94, 234, 212, 0.20);
+        }
+
+        .tech-logo {
+            height: 1.25rem;
+            width: 1.25rem;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        .tech-pill:hover .tech-logo,
+        .tech-pill-dark:hover .tech-logo {
+            transform: rotate(-8deg) scale(1.15);
+        }
+    </style>
+</div>
+
+
+</section>
+
+
+
+<!-- Projects Section -->
+
+
+<section id="projects" class="bg-[#08111f] py-24">
+    <div class="mx-auto w-[92%] max-w-6xl">
+        <!-- Section Header -->
+        <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.35em] text-accent">
+                    Engineering Work
+                </p>
+
+
+            <h2 class="text-4xl font-extrabold leading-tight text-white md:text-6xl">
+                Selected project areas
+            </h2>
+        </div>
+
+        <a href="{{ profile.github }}"
+           target="_blank"
+           rel="noopener"
+           class="inline-flex items-center gap-3 text-sm font-extrabold uppercase tracking-[0.18em] text-accent transition hover:translate-x-1">
+            View all repositories
+            <span>→</span>
+        </a>
+    </div>
+
+    <!-- Project Cards -->
+    <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {% for project in projects %}
+        <article class="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101b2c] transition duration-300 hover:-translate-y-2 hover:border-accent/40 hover:bg-[#132239]">
+
+            <!-- Project Image -->
+            {% if project.image %}
+            <div class="relative h-52 overflow-hidden bg-[#07111f]">
+                <img src="{% static project.image %}"
+                     alt="{{ project.name }}"
+                     class="h-full w-full object-cover object-top opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-[#101b2c] via-transparent to-transparent"></div>
+            </div>
+            {% else %}
+            <div class="flex h-52 items-center justify-center bg-[#07111f]">
+                <div class="text-center">
+                    <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10 text-accent">
+                        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m8 9-4 3 4 3"/>
+                            <path d="m16 9 4 3-4 3"/>
+                        </svg>
+                    </div>
+                    <p class="text-sm font-bold text-mutedText">Project Preview</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Project Content -->
+            <div class="flex flex-1 flex-col p-6">
+                <h3 class="text-xl font-extrabold text-white">
+                    {{ project.name }}
+                </h3>
+
+                <p class="mt-4 text-sm leading-7 text-softText">
+                    {{ project.description }}
+                </p>
+
+                <!-- Limited Tech List -->
+                <div class="mt-5 flex flex-wrap gap-2">
+                    {% for tech in project.tech|slice:":4" %}
+                    <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                        {{ tech }}
+                    </span>
+                    {% endfor %}
+                </div>
+
+                <!-- View All Techs -->
+                <details class="mt-4">
+                    <summary class="cursor-pointer list-none text-sm font-bold text-accent transition hover:text-white">
+                        View all techs +
+                    </summary>
+
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        {% for tech in project.tech %}
+                        <span class="rounded-md border border-white/10 bg-[#07111f] px-3 py-1 text-xs font-semibold text-softText">
+                            {{ tech }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </details>
+
+                <!-- GitHub Link -->
+                <div class="mt-auto border-t border-white/10 pt-5">
+                    <a href="{{ project.link }}"
+                       target="_blank"
+                       rel="noopener"
+                       class="inline-flex items-center gap-3 font-extrabold text-accent transition group-hover:translate-x-1 hover:text-white">
+
+                        <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2.16c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.76 2.72 1.25 3.38.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11.04 11.04 0 0 1 12 6.02c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+                        </svg>
+
+                        View Project on GitHub
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+
+</section>
+
+
+
+
+<!-- Certifications Section -->
+
+<section id="certifications" class="bg-[#08111f] py-24">
+    <div class="mx-auto w-[92%] max-w-6xl">
+        <div class="mb-14">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.35em] text-accent">
+                Certifications
+            </p>
+
+
+        <h2 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            Training and Certificates
+        </h2>
+
+        <div class="mt-5 h-1 w-20 rounded-full bg-accent"></div>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+        {% for certificate in certifications %}
+        <article class="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#101b2c] p-8 shadow-xl transition duration-300 hover:-translate-y-2 hover:border-accent/40 hover:bg-[#132239]">
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent/0 via-accent to-accent/0 opacity-0 transition duration-300 group-hover:opacity-100"></div>
+
+            <div class="mb-8 flex items-start justify-between gap-5">
+                <div class="flex items-center gap-4">
+                    <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-[#1b283b] text-accent shadow-lg shadow-black/20">
+                        {% if "Cybersecurity" in certificate.name %}
+                        <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                        {% else %}
+                        <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <path d="m10 9-3 3 3 3"/>
+                            <path d="m14 9 3 3-3 3"/>
+                        </svg>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-full border border-white/10 bg-[#07111f] px-3 py-1.5">
+                    {% if certificate.logo %}
+                    <img src="{% static certificate.logo %}"
+                         alt="{{ certificate.issuer }}"
+                         class="h-6 w-6 rounded-full object-cover">
+                    {% endif %}
+
+                    <span class="text-xs font-bold text-mutedText">
+                        {{ certificate.issuer }}
+                    </span>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-extrabold text-white">
+                {{ certificate.name }}
+            </h3>
+
+            {% if certificate.category %}
+            <p class="mt-2 text-sm font-bold text-accent">
+                {{ certificate.category }}
+            </p>
+            {% endif %}
+
+            {% if certificate.description %}
+            <p class="mt-6 text-base leading-8 text-softText">
+                {{ certificate.description }}
+            </p>
+            {% endif %}
+
+            {% if certificate.skills %}
+            <div class="mt-7 flex flex-wrap gap-3">
+                {% for skill in certificate.skills %}
+                <span class="rounded-md border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                    {{ skill }}
+                </span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="mt-10 border-t border-white/10 pt-7">
                 {% if certificate.credential_url %}
-                <a href="{{ certificate.credential_url }}" target="_blank" rel="noopener" class="project-link">
-                    View Certificate →
+                <a href="{{ certificate.credential_url }}"
+                   target="_blank"
+                   rel="noopener"
+                   class="inline-flex items-center gap-2 font-extrabold text-accent transition group-hover:translate-x-1 hover:text-white">
+                    View Certificate
+                    <span>→</span>
                 </a>
+                {% else %}
+                <span class="text-sm font-semibold text-mutedText">
+                    Certificate link coming soon
+                </span>
                 {% endif %}
-            </article>
-            {% endfor %}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="mt-16 grid gap-6 md:grid-cols-3">
+        <div class="flex items-center gap-5 rounded-xl border border-white/10 bg-white/5 p-6">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
+
+            <div>
+                <h3 class="font-extrabold text-white">
+                    Verified Learning
+                </h3>
+
+                <p class="text-sm text-mutedText">
+                    Training from recognized platforms
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-5 rounded-xl border border-white/10 bg-white/5 p-6">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 17h16"/>
+                    <path d="M6 17V7h12v10"/>
+                    <path d="M9 10h6"/>
+                </svg>
+            </div>
+
+            <div>
+                <h3 class="font-extrabold text-white">
+                    Practical Training
+                </h3>
+
+                <p class="text-sm text-mutedText">
+                    Hands-on project-based learning
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-5 rounded-xl border border-white/10 bg-white/5 p-6">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+                    <path d="M21 3v6h-6"/>
+                </svg>
+            </div>
+
+            <div>
+                <h3 class="font-extrabold text-white">
+                    Continuous Growth
+                </h3>
+
+                <p class="text-sm text-mutedText">
+                    Updating skills in web, AI/ML & DevOps
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" class="bg-[radial-gradient(circle_at_center,rgba(94,234,212,0.14),transparent_42%)] bg-darkBg py-20">
+    <div class="mx-auto w-[92%] max-w-4xl rounded-3xl border border-white/10 bg-white/5 p-8 text-center md:p-12">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-accent">
+            Contact
+        </p>
+
+        <h2 class="text-3xl font-extrabold md:text-5xl">
+            Let's build something useful.
+        </h2>
+
+        <p class="mx-auto mt-5 max-w-2xl text-softText">
+            Open to collaboration on backend, API-based, web development, and AI-powered projects.
+        </p>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+           <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to={{ profile.email }}&su=Portfolio%20Contact" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:border-accent/50 hover:text-accent">
+<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+<path fill="#EA4335" d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-11Z"/>
+<path fill="#FFFFFF" d="M5 7.2v10.3c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V7.2l-7 5-7-5Z"/>
+<path fill="#EA4335" d="M5.5 6h13c.2 0 .4.1.5.3L12 11.2 5 6.3c.1-.2.3-.3.5-.3Z"/>
+</svg>
+Email Me
+</a>
+
+           <a href="{{ profile.linkedin }}"
+   target="_blank"
+   rel="noopener"
+   class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:border-accent/50 hover:text-accent">
+    <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.54V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z"/>
+    </svg>
+    LinkedIn
+</a>
+
+<a href="{{ profile.github }}"
+   target="_blank"
+   rel="noopener"
+   class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:border-accent/50 hover:text-accent">
+    <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2.16c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.76 2.72 1.25 3.38.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11.04 11.04 0 0 1 12 6.02c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+    </svg>
+    GitHub
+</a>
         </div>
     </div>
 </section>
-    <section class="section">
-        <div class="container">
-            <p class="section-label">Currently Learning</p>
-            <h2>What I am improving now</h2>
-
-            <div class="learning-grid">
-                {% for item in learning_now %}
-                <div class="learning-item">{{ item }}</div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="projects">
-        <div class="container">
-            <p class="section-label">Projects</p>
-            <h2>Selected project areas</h2>
-
-            <div class="project-grid">
-                {% for project in projects %}
-                <article class="project-card">
-                    <h3>{{ project.name }}</h3>
-                    <p>{{ project.description }}</p>
-                    <div class="tags">
-                        {% for tech in project.tech %}
-                        <span>{{ tech }}</span>
-                        {% endfor %}
-                    </div>
-                    <a href="{{ project.link }}" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
-                </article>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <section class="section dark">
-        <div class="container">
-            <p class="section-label">Focus Areas</p>
-            <h2>Engineering areas I care about</h2>
-
-            <div class="focus-grid">
-                {% for item in focus_areas %}
-                <div>{{ item }}</div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 
 
-    <section class="section contact" id="contact">
-        <div class="container contact-card">
-            <p class="section-label">Contact</p>
-            <h2>Let's build something useful.</h2>
-            <p>Open to collaboration on backend, API-based, web development, and AI-powered projects.</p>
-
-             <div class="contact-actions">
-  <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to={{ profile.email }}&su=Portfolio%20Contact" 
-   target="_blank" 
-   rel="noopener" 
-   class="btn secondary">
-    <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/>
-    </svg>
-    Email Me
-</a>
-    <a href="{{ profile.linkedin }}" target="_blank" rel="noopener" class="btn secondary">
-        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.54V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z"/>
-        </svg>
-        LinkedIn
-    </a>
-
-    <a href="{{ profile.github }}" target="_blank" rel="noopener" class="btn secondary">
-        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2.16c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.76 2.72 1.25 3.38.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11.04 11.04 0 0 1 12 6.02c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-        </svg>
-        GitHub
-    </a>
-</div>
-        </div>
-    </section>
 </main>
 {% endblock %}
