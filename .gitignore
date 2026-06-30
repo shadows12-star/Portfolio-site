@@ -8,7 +8,7 @@ venv/
 
 # Django
 staticfiles/
-media/
+
 
 # OS / editor
 .DS_Store
