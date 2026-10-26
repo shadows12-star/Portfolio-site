@@ -3,19 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ profile.name }} | Portfolio</title>
 
     <meta name="description" content="{{ profile.title }}">
-    <meta name="theme-color" content="#08111f">
+    <meta name="theme-color" content="#0c0e18">
 
     <meta property="og:title" content="{{ profile.name }} | Portfolio">
     <meta property="og:description" content="{{ profile.title }}">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="{% static 'portfolio/images/profile.jpeg' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,13 +28,13 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: "#08111f",
-                        darkSection: "#0b1526",
-                        darkCard: "#111c2d",
-                        darkCard2: "#162235",
-                        accent: "#5eead4",
-                        softText: "#cbd8ea",
-                        mutedText: "#9fb0c9"
+                        darkBg: "#0c0e18",
+                        darkSection: "#10132a",
+                        darkCard: "#131730",
+                        darkCard2: "#181d3a",
+                        accent: "#ffb547",
+                        softText: "#b9bed8",
+                        mutedText: "#8a90b0"
                     }
                 }
             }
@@ -39,54 +42,198 @@
     </script>
 
     <style>
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --bg: #0c0e18;
+            --panel: #131730;
+            --panel2: #181d3a;
+            --line: rgba(255, 255, 255, .1);
+            --text: #eef0fa;
+            --soft: #b9bed8;
+            --mute: #8a90b0;
+            --acc: #ffb547;
+            --acc2: #9aa8ff;
+            --display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
         }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
         body {
             overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Instrument Sans', system-ui, sans-serif;
+            line-height: 1.65;
         }
 
-        @media (min-width: 1024px) {
-            html {
-                font-size: 17px;
-            }
+        h1, h2, h3 { font-family: var(--display); letter-spacing: -.02em; line-height: 1.1; }
+
+        a:focus-visible, button:focus-visible, summary:focus-visible {
+            outline: 2px solid var(--acc);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        @media (min-width: 1280px) {
-            [class*="max-w-6xl"] {
-                max-width: 1400px !important;
-            }
+        .wrap { width: 92%; max-width: 1240px; margin-inline: auto; }
 
-            [class*="max-w-5xl"] {
-                max-width: 1200px !important;
-            }
-
-            [class*="max-w-4xl"] {
-                max-width: 1100px !important;
-            }
-
-            [class*="w-[92%]"] {
-                width: 95% !important;
-            }
+        /* ---------- Navigation ---------- */
+        .site-header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(12, 14, 24, .86);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
         }
-
+        .brand { font-family: var(--display); font-size: 1.25rem; font-weight: 800; color: var(--text); transition: color .2s; }
+        .brand:hover { color: var(--acc); }
+        .nav-link { color: var(--soft); font-size: .92rem; font-weight: 500; transition: color .2s; }
+        .nav-link:hover { color: var(--acc); }
         .nav-active {
-            color: #5eead4 !important;
+            color: var(--acc) !important;
             font-weight: 700;
             text-decoration: underline;
             text-underline-offset: 8px;
+            text-decoration-thickness: 2px;
         }
+        .nav-ext { color: var(--soft); font-size: .92rem; font-weight: 500; transition: color .2s; }
+        .nav-ext:hover { color: var(--acc); }
+
+        /* ---------- Buttons ---------- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+            padding: .8rem 1.4rem; border-radius: 999px;
+            background: var(--acc); color: #1a1205; font-weight: 700; font-size: .95rem;
+            border: 1px solid var(--acc);
+            transition: transform .2s, background .2s, border-color .2s, color .2s;
+        }
+        .btn:hover { transform: translateY(-2px); background: #ffc873; border-color: #ffc873; }
+        .btn-o { background: transparent; color: var(--text); border-color: rgba(255, 255, 255, .22); }
+        .btn-o:hover { background: transparent; color: var(--acc); border-color: var(--acc); }
+        .btn-sm { padding: .5rem 1.1rem; font-size: .88rem; }
+
+        /* ---------- Layout ---------- */
+        .sec { padding: clamp(4.5rem, 9vw, 7.5rem) 0; border-top: 1px solid var(--line); }
+        .split { display: grid; gap: 2.5rem; }
+        @media (min-width: 1024px) {
+            .split { grid-template-columns: minmax(0, .4fr) minmax(0, .6fr); gap: 5rem; }
+            .stick { position: sticky; top: 110px; align-self: start; }
+        }
+        .title { font-size: clamp(2rem, 4.2vw, 3.3rem); font-weight: 700; }
+        .sub { color: var(--mute); font-size: .95rem; margin-bottom: .9rem; }
+        .lead { color: var(--soft); max-width: 34rem; margin-top: 1.2rem; }
+
+        /* ---------- Shared bits ---------- */
+        .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 1.1rem; }
+        .chip {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .4rem .8rem; border-radius: .6rem;
+            border: 1px solid var(--line); background: rgba(255, 255, 255, .03);
+            font-size: .875rem; font-weight: 600; color: var(--text);
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+        .chip:hover { border-color: var(--acc); background: rgba(255, 181, 71, .08); transform: translateY(-2px); }
+        .chip img { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+        .inv { filter: brightness(0) invert(1); }
+        .tag {
+            display: inline-block; padding: .2rem .65rem; border-radius: .4rem;
+            background: rgba(255, 181, 71, .12); color: var(--acc);
+            font-size: .78rem; font-weight: 600;
+        }
+        .ic { width: 1.15em; height: 1.15em; flex-shrink: 0; fill: currentColor; }
+        .ics { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .link-u { display: inline-flex; align-items: center; gap: .5rem; color: var(--soft); border-bottom: 1px solid rgba(255, 181, 71, .45); padding-bottom: .15rem; transition: color .2s; }
+        .link-u:hover { color: var(--acc); }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            padding: clamp(4rem, 9vw, 7rem) 0 clamp(4.5rem, 9vw, 7.5rem);
+            background:
+                radial-gradient(60rem 32rem at 8% -10%, rgba(154, 168, 255, .16), transparent 60%),
+                radial-gradient(40rem 28rem at 100% 100%, rgba(255, 181, 71, .12), transparent 60%);
+        }
+        .hero-grid { display: grid; gap: 3.5rem; align-items: center; }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.35fr .65fr; gap: 5rem; } }
+        .status { display: inline-flex; align-items: center; gap: .6rem; color: var(--soft); font-weight: 600; font-size: .95rem; }
+        .status::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: var(--acc); box-shadow: 0 0 0 5px rgba(255, 181, 71, .18); }
+        .display { font-size: clamp(3rem, 8.2vw, 6.6rem); font-weight: 800; letter-spacing: -.035em; line-height: .98; margin: 1.3rem 0 1.6rem; }
+        .arch {
+            border-radius: 999px 999px 1.4rem 1.4rem; overflow: hidden; aspect-ratio: 4 / 5;
+            border: 1px solid var(--line); box-shadow: 14px 14px 0 var(--acc);
+            background: var(--panel);
+        }
+        .arch img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .rise { opacity: 0; transform: translateY(18px); animation: rise .7s cubic-bezier(.2, .7, .2, 1) forwards; }
+            .rise:nth-child(2) { animation-delay: .08s; }
+            .rise:nth-child(3) { animation-delay: .16s; }
+            .rise:nth-child(4) { animation-delay: .24s; }
+            .rise:nth-child(5) { animation-delay: .32s; }
+            .rise:nth-child(6) { animation-delay: .4s; }
+            @keyframes rise { to { opacity: 1; transform: none; } }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+        /* ---------- About ---------- */
+        .focus-item { display: grid; gap: .3rem; padding: 1.4rem 0; border-top: 1px solid var(--line); }
+        .focus-item h3 { font-size: 1.2rem; font-weight: 700; }
+        .focus-item p { color: var(--soft); font-size: .95rem; }
+        .fact { padding: 1.2rem 1.4rem; }
+        .fact p { color: var(--mute); font-size: .85rem; }
+        .fact h3 { font-size: 1.1rem; font-weight: 700; margin-top: .15rem; }
+
+        /* ---------- Education ---------- */
+        .stat p:first-child { color: var(--mute); font-size: .85rem; }
+        .stat p:last-child { font-weight: 600; margin-top: .2rem; }
+        .quote { border-left: 3px solid var(--acc); background: rgba(255, 255, 255, .04); border-radius: 0 .6rem .6rem 0; padding: 1.1rem 1.3rem; color: var(--soft); font-size: .95rem; }
+
+        /* ---------- Skills ---------- */
+        .srow { display: grid; gap: 1.4rem; padding: 2.2rem 0; border-top: 1px solid var(--line); }
+        .srow:last-child { border-bottom: 1px solid var(--line); }
+        @media (min-width: 900px) { .srow { grid-template-columns: .38fr .62fr; gap: 3rem; } }
+        .srow h3 { font-size: 1.4rem; font-weight: 700; }
+        .srow .d { color: var(--mute); font-size: .92rem; margin-top: .3rem; }
+        .mini { color: var(--mute); font-size: .85rem; margin-bottom: .7rem; }
+
+        /* ---------- Projects ---------- */
+        .pgroup { margin-bottom: 4.5rem; scroll-margin-top: 110px; }
+        .pgroup:last-child { margin-bottom: 0; }
+        .pcard {
+            display: flex; flex-direction: column; overflow: hidden;
+            background: var(--panel); border: 1px solid var(--line); border-radius: 1.1rem;
+            transition: transform .25s, border-color .25s;
+        }
+        .pcard:hover { transform: translateY(-5px); border-color: rgba(255, 181, 71, .55); }
+        .pimg { position: relative; height: 13rem; overflow: hidden; background: #090b15; display: flex; align-items: center; justify-content: center; color: var(--acc); }
+        .pimg img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; }
+        .pcard:hover .pimg img { transform: scale(1.05); }
+        .pimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--panel), transparent 55%); pointer-events: none; }
+        details summary { cursor: pointer; list-style: none; color: var(--acc); font-weight: 600; font-size: .9rem; }
+        details summary::-webkit-details-marker { display: none; }
+        details summary:hover { color: var(--text); }
+        details[open] summary { color: var(--soft); }
+
+        /* ---------- Certifications ---------- */
+        .cert { padding: 2rem; transition: border-color .25s, transform .25s; }
+        .cert:hover { border-color: rgba(154, 168, 255, .6); transform: translateY(-4px); }
+        .cert-ic { display: flex; width: 3.4rem; height: 3.4rem; align-items: center; justify-content: center; border-radius: .9rem; background: var(--panel2); color: var(--acc2); }
+
+        /* ---------- Contact ---------- */
+        .contact-box {
+            text-align: center; padding: clamp(2.5rem, 6vw, 5rem) 1.5rem;
+            border-radius: 2rem; border: 1px solid var(--line);
+            background:
+                radial-gradient(36rem 18rem at 50% 0%, rgba(255, 181, 71, .16), transparent 70%),
+                var(--panel);
+        }
+
+        footer { border-top: 1px solid var(--line); }
     </style>
 </head>
 
-<body class="bg-darkBg text-white antialiased">
-    <header class="sticky top-0 z-50 border-b border-white/10 bg-darkBg/95 backdrop-blur-xl">
-        <nav class="mx-auto flex min-h-[72px] w-[95%] max-w-[1400px] items-center justify-between">
+<body class="antialiased">
+    <header class="site-header">
+        <nav class="wrap flex min-h-[72px] items-center justify-between">
             <!-- Brand -->
-            <a href="#home" class="bg-gradient-to-r from-accent to-cyan-300 bg-clip-text text-xl font-black tracking-wide text-transparent transition hover:from-white hover:to-accent">
-           {{ profile.name }}
-          </a>
+            <a href="#home" class="brand">{{ profile.name }}</a>
 
             <!-- Mobile Menu Button -->
             <button id="menuBtn"
@@ -97,54 +244,19 @@
 
             <!-- Navbar Links -->
             <div id="navLinks"
-                 class="hidden absolute left-0 right-0 top-[72px] flex-col gap-5 border-b border-white/10 bg-darkBg px-[4%] py-5 text-sm text-softText md:static md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0">
+                 class="hidden absolute left-0 right-0 top-[72px] flex-col gap-5 border-b border-white/10 bg-[#0c0e18] px-[4%] py-5 md:static md:flex md:flex-row md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0">
 
-                <a href="#about"
-                   data-section="about"
-                   class="nav-link text-softText hover:text-accent">
-                    About
-                </a>
+                <a href="#about" data-section="about" class="nav-link">About</a>
+                <a href="#skills" data-section="skills" class="nav-link">Skills</a>
+                <a href="#education" data-section="education" class="nav-link">Education</a>
+                <a href="#certifications" data-section="certifications" class="nav-link">Certifications</a>
+                <a href="#projects" data-section="projects" class="nav-link">Projects</a>
 
-                <a href="#skills"
-                   data-section="skills"
-                   class="nav-link text-softText hover:text-accent">
-                    Skills
-                </a>
+                <a href="{{ profile.github }}" target="_blank" rel="noopener" class="nav-ext">GitHub</a>
 
-                <a href="#education"
-                   data-section="education"
-                   class="nav-link text-softText hover:text-accent">
-                    Education
-                </a>
+                <a href="#contact" data-section="contact" class="nav-link">Contact</a>
 
-                <a href="#certifications"
-                   data-section="certifications"
-                   class="nav-link text-softText hover:text-accent">
-                    Certifications
-                </a>
-
-                <a href="#projects"
-                   data-section="projects"
-                   class="nav-link text-softText hover:text-accent">
-                    Projects
-                </a>
-
-                <a href="{{ profile.github }}"
-                   target="_blank"
-                   rel="noopener"
-                   class="text-softText hover:text-accent">
-                    GitHub
-                </a>
-
-                <a href="#contact"
-                   data-section="contact"
-                   class="nav-link text-softText hover:text-accent">
-                    Contact
-                </a>
-
-                <a href="{% static 'portfolio/files/Asiful Alam Sami _Cv.pdf' %}"
-                   download
-                   class="rounded-lg bg-accent px-5 py-2 font-bold text-darkBg transition hover:-translate-y-0.5 hover:bg-[#7fffee]">
+                <a href="{% static 'portfolio/files/Asiful Alam Sami _Cv.pdf' %}" download class="btn btn-sm">
                     Download CV
                 </a>
             </div>
@@ -153,8 +265,8 @@
 
     {% block content %}{% endblock %}
 
-    <footer class="bg-[#050b14] py-7 text-center text-mutedText">
-        <div class="mx-auto w-[95%] max-w-[1400px]">
+    <footer class="py-8 text-center" style="background:#080a13;color:var(--mute)">
+        <div class="wrap">
             <p>© {{ profile.name }}. Built with Django & Tailwind CSS.</p>
         </div>
     </footer>

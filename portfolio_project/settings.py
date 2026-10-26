@@ -4,8 +4,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "replace-this-secret-key-before-production")
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-
+DEBUG = os.environ.get(
+    "DEBUG",
+    "True" if os.environ.get("VERCEL") is None else "False"
+).lower() == "true"
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".vercel.app"]
 
 CSRF_TRUSTED_ORIGINS = [
